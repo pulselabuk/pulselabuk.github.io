@@ -2,6 +2,8 @@
 
 Welcome to the official **Pulse Lab UK Free Guide** landing page — your first step to transforming your digital strategy.
 
+https://pulselabuk.github.io/
+
 ---
 
 ## 🎁 What’s Inside the Free Guide?
@@ -42,5 +44,7 @@ Now we’re sharing our tools with you. For free.
 
 **🔓 Ready to start?**  
 👉 Open the page and grab your free guide now.
+
+https://pulselabuk.github.io/
 
 ---
