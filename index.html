@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pulse Lab UK - Free Guide</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      height: 100vh;
+      background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+      font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+      color: #ffffff;
+    }
+    #header {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 70%;
+      max-width: 800px;
+      padding: 15px 30px;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      z-index: 10;
+    }
+    .header-text {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #000000;
+      margin: 0;
+    }
+    #container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 100px 20px 20px;
+      min-height: 100vh;
+      box-sizing: border-box;
+    }
+    #carousel {
+      position: relative;
+      width: 70%;
+      max-width: 700px;
+      overflow: hidden;
+    }
+    .slide {
+      position: absolute;
+      width: 100%;
+      padding: 30px;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+      text-align: center;
+      opacity: 0;
+      transform: translateX(100%);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .slide.active {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .slide-title {
+      font-size: 2rem;
+      font-weight: 600;
+      color: #000000;
+      margin: 0 0 10px;
+    }
+    .slide-description {
+      font-size: 1rem;
+      color: #333333;
+      margin: 0;
+    }
+    .nav-button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.5);
+      color: #ffffff;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      font-size: 1.5rem;
+      border-radius: 50%;
+      z-index: 5;
+    }
+    #prev {
+      left: -50px;
+    }
+    #next {
+      right: -50px;
+    }
+    #form-container {
+      margin-top: 40px;
+      text-align: center;
+    }
+    #lead-form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    #lead-form input {
+      padding: 10px;
+      width: 250px;
+      max-width: 100%;
+      border: 1px solid #cccccc;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+    #lead-form button {
+      padding: 10px 20px;
+      background: #007aff;
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    #lead-form button:hover {
+      background: #005bb5;
+    }
+    #thank-you {
+      display: none;
+      margin-top: 20px;
+      font-size: 1.2rem;
+      color: #00ffcc;
+    }
+    /* Background animation */
+    @keyframes sheen {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 200% 50%; }
+    }
+    body {
+      background: linear-gradient(135deg, #1a1a1a, #0a0a0a, #1a1a1a);
+      background-size: 200% 200%;
+      animation: sheen 10s ease infinite;
+    }
+  </style>
+</head>
+<body>
+  <div id="header">
+    <h2 class="header-text">🚀 Pulse Lab UK</h2>
+  </div>
+  <div id="container">
+    <div id="carousel">
+      <button id="prev" class="nav-button">←</button>
+      <button id="next" class="nav-button">→</button>
+    </div>
+    <div id="form-container">
+      <form id="lead-form">
+        <input type="text" id="name" placeholder="Your Name" required />
+        <input type="email" id="email" placeholder="Your Email" required />
+        <button type="submit">Get Free Guide</button>
+      </form>
+      <div id="thank-you">Thank you! We'll send your guide soon.</div>
+    </div>
+  </div>
+
+  <script>
+    console.log('Script running at', new Date().toLocaleString());
+    try {
+      const carousel = document.getElementById('carousel');
+      const prevButton = document.getElementById('prev');
+      const nextButton = document.getElementById('next');
+      const form = document.getElementById('lead-form');
+      const thankYou = document.getElementById('thank-you');
+
+      const slides = [
+        {
+          title: 'Transformative Digital Solutions',
+          description: 'Discover innovative strategies to elevate your business in our free guide.'
+        },
+        {
+          title: 'Web Hosting - 99.9% Uptime',
+          description: 'Learn how our reliable hosting ensures your site stays online, with tips in our guide.'
+        },
+        {
+          title: 'Web Design & Development',
+          description: 'Create stunning websites with our expert insights, included in your free guide.'
+        },
+        {
+          title: 'SEO Optimization',
+          description: 'Boost your rankings with our top 5 SEO tips, detailed in the free guide.'
+        },
+        {
+          title: 'DNS Management',
+          description: 'Simplify your domain setup with best practices from our free guide.'
+        },
+        {
+          title: 'Business Automation',
+          description: 'Streamline operations with automation strategies in our free guide.'
+        },
+        {
+          title: 'AI Integration',
+          description: 'Unlock AI’s potential for your business with insights from our free guide.'
+        }
+      ];
+
+      // Create slides
+      slides.forEach((slide, index) => {
+        const div = document.createElement('div');
+        div.className = 'slide';
+        div.innerHTML = `
+          <h2 class="slide-title">${slide.title}</h2>
+          <p class="slide-description">${slide.description}</p>
+        `;
+        carousel.appendChild(div);
+      });
+
+      const slideElements = document.querySelectorAll('.slide');
+      let currentSlide = 0;
+      let autoPlay = true;
+
+      // Show slide
+      function showSlide(index) {
+        slideElements.forEach((slide, i) => {
+          slide.classList.toggle('active', i === index);
+        });
+      }
+      showSlide(currentSlide);
+
+      // Navigation
+      prevButton.addEventListener('click', () => {
+        autoPlay = false; // Pause auto-play on manual navigation
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+        showSlide(currentSlide);
+      });
+      nextButton.addEventListener('click', () => {
+        autoPlay = false;
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+      });
+
+      // Auto-play
+      setInterval(() => {
+        if (autoPlay) {
+          currentSlide = (currentSlide + 1) % slides.length;
+          showSlide(currentSlide);
+        }
+      }, 5000);
+
+      // Form submission
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        autoPlay = false; // Pause slides on submission
+        thankYou.style.display = 'block';
+        form.style.display = 'none';
+        console.log('Form submitted:', {
+          name: document.getElementById('name').value,
+          email: document.getElementById('email').value
+        });
+        // In a real app, send data to your backend here
+      });
+
+    } catch (err) {
+      console.error('Script error:', err);
+      document.body.innerHTML += '<div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #ff5555; font-family: Arial; text-align: center;">Error running presentation. Please use a modern browser.</div>';
+    }
+  </script>
+</body>
+</html>
